@@ -5,11 +5,13 @@
 <script>
 import { Doughnut as PieChart } from "vue-chartjs";
 
+import { ARRAY_PROP_DEFAULT } from "@/utils/consts";
+
 export default {
   props: {
     legend: {
       type: Array,
-      default: () => [],
+      default: ARRAY_PROP_DEFAULT,
     },
   },
   components: {

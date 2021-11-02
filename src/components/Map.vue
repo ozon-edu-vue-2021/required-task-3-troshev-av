@@ -15,6 +15,8 @@ import MapSVG from "@/assets/images/map.svg";
 import TableSVG from "@/assets/images/workPlace.svg";
 import * as d3 from "d3";
 
+import { ARRAY_PROP_DEFAULT } from "@/utils/consts";
+
 export default {
   components: {
     MapSVG,
@@ -23,28 +25,28 @@ export default {
   props: {
     legend: {
       type: Array,
-      default: () => [],
+      default: ARRAY_PROP_DEFAULT,
     },
     tables: {
       type: Array,
-      default: () => [],
+      default: ARRAY_PROP_DEFAULT,
     },
   },
   data() {
     return {
       isLoading: false,
-      svg: null,
-      g: null,
+      mapSVG: null,
+      mapGroup: null,
       tableSVG: null,
     };
   },
   mounted() {
     this.isLoading = true;
 
-    this.svg = d3.select(this.$refs.map);
-    this.g = this.svg.select("g");
+    this.mapSVG = d3.select(this.$refs.map);
+    this.mapGroup = this.mapSVG.select("g");
     this.tableSVG = d3.select(this.$refs.table);
-    if (this.g) {
+    if (this.mapGroup) {
       this.drawTables();
     } else {
       alert("SVG is incorrect");
@@ -55,12 +57,12 @@ export default {
   methods: {
     drawTables() {
       // создаем группу для рабочик мест
-      const svgTablesGroupPlace = this.g
+      const svgTablesGroupPlace = this.mapGroup
         .append("g")
         .classed("groupPlaces", true);
 
-      const fillsObj = this.legend.reduce((result, item) => {
-        result[item.group_id] = item.color;
+      const fillsObj = this.legend.reduce((result, { group_id, color }) => {
+        result[group_id] = color;
         return result;
       }, {});
 

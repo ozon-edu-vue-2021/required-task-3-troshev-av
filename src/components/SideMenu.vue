@@ -53,6 +53,8 @@ import LegendItem from "./SideMenu/LegendItem.vue";
 import PersonCard from "./SideMenu/PersonCard.vue";
 import PieChart from "./SideMenu/PieChart.vue";
 
+import { ARRAY_PROP_DEFAULT } from "@/utils/consts";
+
 export default {
   props: {
     isUserOpenned: {
@@ -65,7 +67,7 @@ export default {
     },
     legend: {
       type: Array,
-      default: () => [],
+      default: ARRAY_PROP_DEFAULT,
     },
   },
   components: {

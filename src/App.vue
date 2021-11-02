@@ -28,9 +28,9 @@ export default {
   },
   data() {
     const legend = legendData.map((item) => {
-      const tables = tablesData.filter((table) => {
-        return table.group_id === item.group_id;
-      });
+      const tables = tablesData.filter(
+        ({ group_id }) => group_id === item.group_id
+      );
 
       return {
         ...item,
